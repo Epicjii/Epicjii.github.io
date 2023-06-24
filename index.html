@@ -1,0 +1,394 @@
+<!DOCTYPE HTML>
+
+<html lang="en">
+<head>
+<title>Hopper Timer Calculator &ndash; Marcantools</title>
+</head>
+
+<body>
+<nav class="navbar navbar-default" role="navigation">
+  <!-- We use the fluid option here to avoid overriding the fixed width of a normal container within the narrow content columns. -->
+  <div class="container">
+    <div class="navbar-header">
+      <span class="navbar-brand">Marcantools</span>
+    </div>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="calculateur-hopper-timer">Version Française</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+
+  <h1 class="page-header">Hopper Timer Calculator</h1>
+  <p>Calculate the necessary amount of item to reach a desired time on a hopper timer</p>
+  
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="page-header">Settings</h3>
+    
+      <form class="form-horizontal" id="form-input" role="form">
+        <div class="form-group">
+          <label for="input-hours" class="col-sm-2 control-label">Hours</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" id="input-hours" maxlength="2" placeholder="0">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="input-minutes" class="col-sm-2 control-label">Minutes</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" id="input-minutes" maxlength="2" placeholder="0">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="input-seconds" class="col-sm-2 control-label">Seconds</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" id="input-seconds" maxlength="2" placeholder="0">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="input-approximation" class="col-sm-2 control-label">Margin</label>
+          <div class="col-sm-2">
+            <input type="text" class="form-control" id="input-approximation" maxlength="4" placeholder="15">
+          </div>
+          <p class="form-control-static"><span class="glyphicon glyphicon-question-sign tooltiped" data-toggle="tooltip" title="Sometime it's easier to approximate the wanted time. Type here a margin value (in seconds) that is acceptable."></span></p>
+        </div>
+        <div class="form-group">
+          <label for="input-seconds" class="col-sm-2 control-label">Type</label>
+          <div class="col-sm-10">
+            <div class="radio">
+              <label>
+                <input type="radio" name="type" value="cyclic" class="input-type" checked="checked">
+                Cyclic              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="type" value="lengthener" class="input-type">
+                Pulse Lengthener              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-6">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="lag" id="input-lag" checked="checked" value="true"> Take in account the -0.025 second delay per half-cycle <span class="label label-info">recommended</span>              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+    
+    </div>
+    <div class="col-md-6">
+      <h3 class="page-header">Result</h3>
+    
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">Recommended model</label>
+          <div class="col-sm-8">
+            <p class="form-control-static text-muted" id="output-model">Unknown</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-4 control-label">Item number in timer</label>
+          <div class="col-sm-8">
+            <p class="form-control-static text-muted" id="output-timer">n/a</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-4 control-label">Item number in counter</label>
+          <div class="col-sm-8">
+            <p class="form-control-static text-muted" id="output-counter">n/a</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-4 control-label">Estimated real time</label>
+          <div class="col-sm-8">
+            <p class="form-control-static text-muted" id="output-estimation">n/a</p>
+          </div>
+        </div>
+      </form>
+    
+    </div>
+  </div>
+  
+  <h3 class="page-header">Model details</h3>
+  
+  
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            Standard          </a>
+        </h4>
+      </div>
+      <div id="collapseOne" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <img src="/web/20220817202721im_/http://monsieurtouf.fr/static/img/hopper-timers/hopper-timer-1.png">
+          <br>
+          To stop it, just power one of the pistons or one of the hoppers.        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+            Standard Pulse Lengthener          </a>
+        </h4>
+      </div>
+      <div id="collapseTwo" class="panel-collapse collapse">
+        <div class="panel-body">
+          <img src="/web/20220817202721im_/http://monsieurtouf.fr/static/img/hopper-timers/hopper-timer-2.png">
+          <br>
+          Activation : power the sticky piston        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+            Ultra Long          </a>
+        </h4>
+      </div>
+      <div id="collapseThree" class="panel-collapse collapse">
+        <div class="panel-body">
+          <img src="/web/20220817202721im_/http://monsieurtouf.fr/static/img/hopper-timers/hopper-timer-3.png">
+          <br>
+          Output is on the torch on the diamond block. To stop it, power one of the pistons on the bottom of the image.<br>Item number in timer : bottom hoppers<br>Item number in counter : top hoppers        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+            Ultra Long Pulse Lengthener          </a>
+        </h4>
+      </div>
+      <div id="collapseFour" class="panel-collapse collapse">
+        <div class="panel-body">
+          <img src="/web/20220817202721im_/http://monsieurtouf.fr/static/img/hopper-timers/hopper-timer-4.png">
+          <br>
+          Activation : power the gold block.<br>Output is on the diamond block.<br>Item number in timer : bottom hoppers<br>Item number in counter : dropper        </div>
+      </div>
+    </div>
+  </div>
+  
+    
+</div>
+
+<script>
+
+$('.tooltiped').tooltip();
+
+/*
+  * Copyright 2014 Monsieur Touf *
+  
+  You are allowed to use this code since you mention me and put a link to this page on your creation
+*/
+
+
+var $hours = $( '#input-hours' ),
+    $minutes = $( '#input-minutes' ),
+    $seconds = $( '#input-seconds' ),
+    $approximation = $( '#input-approximation' ),
+    $type = $( '.input-type' ),
+    $lag = $( '#input-lag' ),
+    $model = $( '#output-model' ),
+    $timer = $( '#output-timer' ),
+    $counter = $( '#output-counter' ),
+    $estimation = $( '#output-estimation' );
+
+var lang = {
+  model : {
+    standard : 'Standard',
+    standardLenghtener : 'Standard Pulse Lengthener',
+    doubleStandard : 'Ultra Long',
+    doubleLenghtener : 'Ultra Long Pulse Lengthener',
+    unknown : 'Unknown'
+  }
+};
+
+function compute() {
+  var hours = parseInt( $hours.val() ),
+      minutes = parseInt( $minutes.val() ),
+      seconds = parseInt( $seconds.val() ),
+      approximation = parseFloat( $approximation.val() ),
+      lengthener = $type.filter( ':checked' ).val() === 'lengthener',
+      lag = $lag.filter( ':checked' ).length === 1,
+      maxHalfCycleTime = timeForHalfCycle( 320, lag );
+  
+  if( isNaN(hours) ) hours = 0;
+  if( isNaN(minutes) ) minutes = 0;
+  if( isNaN(seconds) ) seconds = 0;
+  if( isNaN(approximation) ) approximation = 15;
+  
+  var time = hours * 3600 + minutes * 60 + seconds,
+      itemsNeeded = itemsForHalfCycle( time / 2, lag ),
+      model = lang.model.unknown, 
+      itemsInTimer = 'n/a', 
+      itemsInCounter = 'n/a', 
+      estimatedTime = 'n/a';
+
+  if( time > 0 ) {
+    if( itemsNeeded < 320 ) {
+      model = lang.model.standard;
+      if( lengthener ) model = lang.model.standardLenghtener;
+      itemsInTimer = Math.ceil( itemsNeeded );
+      itemsInCounter = 0;
+      estimatedTime = timeForHalfCycle( itemsInTimer, lag ) * 2;
+    }
+    else if( lengthener && time < (maxHalfCycleTime * 639) ) {
+      model = lang.model.doubleLenghtener;
+      
+      var iTimer = 320,
+          iCounter = Math.ceil( ( time / maxHalfCycleTime + 1 ) / 2 ),
+          tTimer = maxHalfCycleTime,
+          tTotal = tTimer * ( iCounter * 2 - 1 ),
+          delta = tTotal - time;
+      
+      var ic = iCounter,
+          it,
+          th,
+          tt,
+          d;
+      
+      while( ic <= 320 ) {
+        it = iTimer;
+        do {
+          th = timeForHalfCycle( it, lag );
+          tt = th * ( ic * 2 - 1 );
+          d = tt - time;
+          
+          if( d > 0 && d < delta ) {
+            iTimer = it,
+            iCounter = ic,
+            tTotal = tt,
+            delta = d;
+          }
+          
+          it--;
+        }
+        while( d > 0 );
+        
+        if( delta < approximation ) break;
+        
+        ic++;
+      }
+      
+      itemsInTimer = iTimer;
+      itemsInCounter = iCounter;
+      estimatedTime = tTotal;
+    }
+    else if( !lengthener && time < (maxHalfCycleTime * 1278) ) {
+      model = lang.model.doubleStandard;
+      
+      var iTimer = 320,
+          iCounter = Math.ceil( ( (time / maxHalfCycleTime) / 2 + 1 ) / 2 ),
+          tTimer = maxHalfCycleTime,
+          tTotal = tTimer * ( iCounter * 2 - 1 ) * 2,
+          delta = tTotal - time;
+      
+      var ic = iCounter,
+          it,
+          th,
+          tt,
+          d;
+      
+      while( ic <= 320 ) {
+        it = iTimer;
+        do {
+          th = timeForHalfCycle( it, lag );
+          tt = th * ( ic * 2 - 1 ) * 2;
+          d = tt - time;
+          
+          if( d > 0 && d < delta ) {
+            iTimer = it,
+            iCounter = ic,
+            tTotal = tt,
+            delta = d;
+          }
+          
+          it--;
+        }
+        while( d > 0 );
+        
+        if( delta < approximation ) break;
+        
+        ic++;
+      }
+      
+      itemsInTimer = iTimer;
+      itemsInCounter = iCounter;
+      estimatedTime = tTotal;
+    }
+  }
+  
+  $model.html( model );
+  
+  if( itemsInTimer === 'n/a' ) $timer.html( 'n/a' );
+  else $timer.html( formatStack(itemsInTimer) );
+  
+  if( itemsInCounter === 'n/a' ) $counter.html( 'n/a' );
+  else $counter.html( formatStack(itemsInCounter) );
+  
+  if( estimatedTime === 'n/a' ) $estimation.html( 'n/a' );
+  else $estimation.html( formatTime(estimatedTime) );
+}
+
+function itemsForHalfCycle( time, lag ) {
+  if( lag ) time += .025;
+  return time / .4;
+}
+
+function timeForHalfCycle( items, lag ) {
+  var time = items * .4;
+  if( lag ) time -= .025;
+  return time;
+}
+
+function formatTime( time ) {
+  var hours = ( time / 3600 ) | 0,
+      minutes = ( ( time % 3600 ) / 60 ) | 0,
+      seconds = ( time % 60 ) | 0,
+      ms = Math.round( (time * 1000) % 1000 ),
+      strings = [];
+
+  if( hours > 0 ) strings.push( hours + 'h' );
+  if( minutes > 0 || hours > 0 ) strings.push( minutes + 'm' );
+  strings.push( seconds + 's' );
+  if( ms ) strings.push( ms + 'ms' );
+  
+  return strings.join( ' ' );
+}
+
+function formatStack( items ) {
+  var iStacks = ( items / 64 ) | 0,
+      iItems = items % 64,
+      strings = [],
+      string;
+  if( iStacks > 0 ) strings.push( iStacks + ' stacks' );
+  if( iItems > 0 || iStacks === 0 ) strings.push( iItems + ' items' );
+  string = strings.join( ' + ' );
+  if( items > 64 ) string += ' (' + items + ')';
+  return string;
+}
+
+$( '#form-input' ).on( 'change keyup', 'input', function() {
+  compute();
+});
+
+</script>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//web.archive.org/web/20220817202721/http://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-55600037-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+</body>
+</html>
