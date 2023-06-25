@@ -2,7 +2,7 @@
 
 visit [epicjii.github.io/Hopper-Calculator](https://epicjii.github.io/Hopper-Calculator)
 
-Created by Monsieur Touf
+Created by [Monsieur Touf](https://www.youtube.com/@LeMarcantouf)
 
 His website has since been taken over and resold so I decided to reconstruct it, since I used it heavily.
 
