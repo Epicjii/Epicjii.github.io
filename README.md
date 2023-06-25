@@ -1,3 +1,3 @@
 # Epicjii.github.io
 
-visit [epicjii.github.io](url)
+visit [epicjii.github.io](epicjii.github.io)
